@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, ReactNode, useReducer } from "react";
 
 
 interface ICoffeeStores {
@@ -69,11 +69,11 @@ const storeReducer = (state: IntineState = initialState, action: Action): Intine
     case ACTION_TYPES.SET_COFFEE_STORES: {
       return { ...state, coffeeStores: action.payload?.coffeeStores };
     }
-    default: state
+    default: return state
   }
 };
 
-const StoreProvider = ({ children }) => {
+const StoreProvider = ({ children }: { children: ReactNode }) => {
 
 
   const [state, dispatch] = useReducer(storeReducer, initialState);

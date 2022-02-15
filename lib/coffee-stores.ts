@@ -11,7 +11,7 @@ const unsplashApi = createApi({
   //...other fetch options
 });
 
-const getUrlForCoffeeStores = (latLong, query, limit) => {
+const getUrlForCoffeeStores = (latLong:string, query:string, limit:number) => {
   return `https://api.foursquare.com/v2/venues/search?ll=${latLong}&query=${query}&limit=${limit}&client_id=${publicRuntimeConfig.NEXT_PUBLIC_FOURSQUARE_API_KEY_CLIENT}&client_secret=${publicRuntimeConfig.NEXT_PUBLIC_FOURSQUARE_API_KEY_SECRET}&v=20210525`;
 };
 
@@ -43,7 +43,7 @@ export const fetchCoffeeStores = async (
     console.log("datr",data,publicRuntimeConfig.NEXT_PUBLIC_FOURSQUARE_API_KEY)
 
     return (
-      data.results?.map((venue, idx) => {
+      data.results?.map((venue:any, idx:number) => {
         const neighbourhood = venue.location.neighborhood;
         return {
           // ...venue,

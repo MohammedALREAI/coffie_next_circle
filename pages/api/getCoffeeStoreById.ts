@@ -1,15 +1,17 @@
+import { NextApiRequest } from 'next';
+import { NextApiResponse } from 'next';
 import {
   table,
   getMinifiedRecords,
   findRecordByFilter,
 } from "../../lib/airtable";
 
-const getCoffeeStoreById = async (req, res) => {
-  const { id } = req.query;
+const getCoffeeStoreById = async (req:NextApiRequest, res:NextApiResponse) => {
+  const { id } = req.query ;
 
   try {
     if (id) {
-      const records = await findRecordByFilter(id);
+      const records = await findRecordByFilter(id as string);
 
       if (records.length !== 0) {
         res.json(records);

@@ -1,9 +1,11 @@
+import { NextApiResponse } from 'next';
+import { NextApiRequest } from 'next';
 import { fetchCoffeeStores } from "../../lib/coffee-stores";
 
-const getCoffeeStoresByLocation = async (req, res) => {
+const getCoffeeStoresByLocation = async (req:NextApiRequest, res:NextApiResponse) => {
   try {
     const { latLong, limit } = req.query;
-    const response = await fetchCoffeeStores(latLong, limit);
+    const response = await fetchCoffeeStores(latLong as string,Number(limit));
     res.status(200);
     res.json(response);
   } catch (err) {

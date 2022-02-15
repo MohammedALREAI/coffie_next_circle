@@ -14,13 +14,14 @@ import { fetchCoffeeStores } from "../../lib/coffee-stores";
 import { StoreContext } from "../../store/store-context";
 
 import { fetcher, isEmpty } from "../../utils";
+import { GetStaticProps, GetStaticPropsContext } from "next";
 
-export async function getStaticProps(staticProps) {
-  const params = staticProps.params;
+export const getStaticProps = async (context: GetStaticPropsContext<{ id: string }>) => {
+  const params = context.params;
 
   const coffeeStores = await fetchCoffeeStores();
-  const findCoffeeStoreById = coffeeStores.find((coffeeStore) => {
-    return coffeeStore.id.toString() === params.id; //dynamic id
+  const findCoffeeStoreById = coffeeStores.find((coffeeStore: any) => {
+    return coffeeStore.id.toString() === params?.id;
   });
   return {
     props: {
@@ -31,7 +32,7 @@ export async function getStaticProps(staticProps) {
 
 export async function getStaticPaths() {
   const coffeeStores = await fetchCoffeeStores();
-  const paths = coffeeStores.map((coffeeStore) => {
+  const paths = coffeeStores.map((coffeeStore: any) => {
     return {
       params: {
         id: coffeeStore.id.toString(),
@@ -44,7 +45,7 @@ export async function getStaticPaths() {
   };
 }
 
-const CoffeeStore = (initialProps) => {
+const CoffeeStore = (initialProps: any) => {
   const router = useRouter();
 
   const id = router.query.id;
@@ -57,7 +58,7 @@ const CoffeeStore = (initialProps) => {
     state: { coffeeStores },
   } = useContext(StoreContext);
 
-  const handleCreateCoffeeStore = async (coffeeStore) => {
+  const handleCreateCoffeeStore = async (coffeeStore: any) => {
     try {
       const { id, name, voting, imgUrl, neighbourhood, address } = coffeeStore;
       const response = await fetch("/api/createCoffeeStore", {

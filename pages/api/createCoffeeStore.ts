@@ -1,10 +1,11 @@
+import { NextApiRequest, NextApiResponse } from "next";
 import {
   table,
   getMinifiedRecords,
   findRecordByFilter,
 } from "../../lib/airtable";
 
-const createCoffeeStore = async (req, res) => {
+const createCoffeeStore = async (req:NextApiRequest, res:NextApiResponse) => {
   if (req.method === "POST") {
     //find a record
 

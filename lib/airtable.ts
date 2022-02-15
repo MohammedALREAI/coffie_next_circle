@@ -13,7 +13,11 @@ const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(
 
 const table = base("coffee-stores");
 
-const getMinifiedRecord = (record:Object) => {
+const getMinifiedRecord = (record:{
+  [key:string]:any,
+  id:string,
+  fields:any
+}) => {
   return {
     recordId:  record.id ,
     ...record.fields!,
@@ -24,7 +28,7 @@ const getMinifiedRecords = (records:Array<any>) => {
   return records.map((record) => getMinifiedRecord(record));
 };
 
-const findRecordByFilter = async (id) => {
+const findRecordByFilter = async (id:string) => {
   const findCoffeeStoreRecords = await table
     .select({
       filterByFormula: `id="${id}"`,

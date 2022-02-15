@@ -120,7 +120,7 @@ const Home: NextPage = (props: InferGetStaticPropsType<typeof getStaticProps>) =
           <div className={styles.sectionWrapper}>
             <h2 className={styles.heading2}>Toronto stores</h2>
             <div className={styles.cardLayout}>
-              {props.coffeeStores.map(({ id, name, imgUrl }) => {
+              {(props.coffeeStores as Array<any>).map(({ id, name, imgUrl }) => {
                 return (
                   <Card
                     key={id}

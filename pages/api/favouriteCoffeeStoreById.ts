@@ -1,10 +1,11 @@
+import { NextApiRequest, NextApiResponse } from 'next';
 import {
   table,
   findRecordByFilter,
   getMinifiedRecords,
 } from "../../lib/airtable";
 
-const favouriteCoffeeStoreById = async (req, res) => {
+const favouriteCoffeeStoreById = async (req:NextApiRequest, res:NextApiResponse) => {
   if (req.method === "PUT") {
     try {
       const { id } = req.body;
@@ -15,7 +16,7 @@ const favouriteCoffeeStoreById = async (req, res) => {
         if (records.length !== 0) {
           const record = records[0];
 
-          const calculateVoting = parseInt(record.voting) + 1;
+          const calculateVoting = record.voting? Number(record.voting) + 1:1;
 
           const updateRecord = await table.update([
             {

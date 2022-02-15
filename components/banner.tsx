@@ -3,10 +3,10 @@ import styles from "./banner.module.css";
 
 
 interface IBanner {
-  handleOnClick: (e: MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+  handleOnClick: (e: any) => void,
   buttonText: string
 }
-const Banner = (props) => {
+const Banner = ({ handleOnClick, buttonText }: IBanner) => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>
@@ -15,8 +15,8 @@ const Banner = (props) => {
       </h1>
       <p className={styles.subTitle}>Discover your local coffee shops!</p>
       <div className={styles.buttonWrapper}>
-        <button className={styles.button} onClick={props.handleOnClick}>
-          {props.buttonText}
+        <button className={styles.button} onClick={handleOnClick}>
+          {buttonText}
         </button>
       </div>
     </div>
